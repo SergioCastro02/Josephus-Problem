@@ -1,0 +1,49 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "josephus"
+version = "0.1.0"
+description = "Multiple verified approaches to the Josephus problem"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "Sérgio Castro" }]
+keywords = ["josephus", "algorithms", "recurrence", "fenwick-tree"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Topic :: Scientific/Engineering :: Mathematics",
+]
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "hypothesis>=6.0",
+    "ruff>=0.4",
+]
+bench = [
+    "matplotlib>=3.5",
+]
+
+[project.scripts]
+josephus = "josephus.cli:main"
+
+[project.urls]
+Repository = "https://github.com/SergioCastro02/Josephus-Problem"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/josephus"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+
+[tool.ruff]
+src = ["src", "tests"]
+line-length = 88
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
