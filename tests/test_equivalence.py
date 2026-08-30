@@ -10,7 +10,7 @@ from hypothesis import given
 from hypothesis import strategies as st
 
 import josephus
-from josephus import closed_form, recurrence, simulation
+from josephus import closed_form, fenwick, recurrence, simulation
 
 _n = st.integers(min_value=1, max_value=300)
 _k = st.integers(min_value=1, max_value=50)
@@ -29,3 +29,8 @@ def test_closed_form_matches_simulation_for_k2(n):
 @given(n=_n, k=_k)
 def test_package_survivor_matches_simulation(n, k):
     assert josephus.survivor(n, k) == simulation.survivor(n, k)
+
+
+@given(n=_n, k=_k)
+def test_fenwick_order_matches_simulation(n, k):
+    assert fenwick.elimination_order(n, k) == simulation.elimination_order(n, k)
