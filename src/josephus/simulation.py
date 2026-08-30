@@ -42,7 +42,5 @@ def elimination_order(n: int, k: int) -> list[int]:
 
 def survivor(n: int, k: int) -> int:
     """Return the position of the last survivor."""
-    last = -1
-    for last in eliminations(n, k):
-        pass
-    return last
+    # Exhaust the generator keeping only the final value.
+    return deque(eliminations(n, k), maxlen=1)[0]
